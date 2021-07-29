@@ -17,7 +17,9 @@ programa
 	cadeia CODIGO[10]
 	real VALOR [10]
 	inteiro ESTOQUE [10]
-	inteiro 
+	cadeia compra
+	caracter sn = 'N'
+	inteiro quantidade
 	
 	para(inteiro x=0;x<10;x++){
 		CODIGO[x]=("G1"+ (x +1))
@@ -63,10 +65,30 @@ programa
 	para(inteiro x=0;x<10;x++){
 		ESTOQUE[x]=(10)
 	}
+
+	escreva("*****LOJA GRUPO 1*****\n")
+	escreva("**Slogan do Grupo 1**\n")
+	escreva("***PRODUTOS A VENDA***\n")
+	
+	
 	para(inteiro x=0;x<10;x++){
 		escreva(CODIGO[x], "  -  ", PRODUTO[x],"   -   ",VALOR[x],"R$   -   ",ESTOQUE[x],"\n")
 	}
-	
+
+	escreva("Coloque qual o produto deseja comprar: \n")
+	leia(compra)
+	para(inteiro x=0;x<10;x++){
+		se(compra==PRODUTO[x]){
+			escreva("CONFIRMA PRODUTO: ", CODIGO[x], "  -  ", PRODUTO[x],"   -   ",VALOR[x],"R$   -   ",ESTOQUE[x],"\n")
+			escreva("CERTO??")
+			leia(sn)
+			se(sn=='s' ou sn=='S'){
+				escreva("Qual a quantidade?")
+				leia(quantidade)
+				ESTOQUE[x]= ESTOQUE[x]-quantidade
+			}escreva("SALDO RESTANTE ", PRODUTO[x],"   -   ",VALOR[x],"R$   -   ",ESTOQUE[x],"\n")
+		}
+	}
 	
 	
 	
@@ -83,7 +105,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 60; 
+ * @POSICAO-CURSOR = 2103; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
