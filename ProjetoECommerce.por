@@ -16,12 +16,15 @@ programa
 	
 	cadeia PRODUTO[10]
 	cadeia CODIGO[10]
+	cadeia PRODUTOFINAL[10]
+	real VALORFINAL[10]
+	inteiro QTDEFINAL[10]
 	real VALOR [10]
 	inteiro ESTOQUE [10]
 	cadeia compra
 	caracter sn = 'S'
 	inteiro quantidade
-	inteiro carrinho = 0
+	real carrinho = 0
 	inteiro qtdeCompra =0
 	real valorFinal =0.0
 	
@@ -87,10 +90,17 @@ faca{
 					qtdeCompra+=quantidade
 					valorFinal+=carrinho
 					ESTOQUE[x]= ESTOQUE[x]-quantidade
+					PRODUTOFINAL[x]=PRODUTO[x]
+					se(PRODUTO[x]==PRODUTOFINAL[x]){
+					VALORFINAL[x]+=carrinho
+					QTDEFINAL[x]+=quantidade
 					}
-				}escreva("\nSALDO RESTANTE: ", PRODUTO[x],"\t",ESTOQUE[x],"\n")
-			}
+				}
+			}escreva("\nSALDO RESTANTE: ", PRODUTO[x],"\t",ESTOQUE[x],"\n")
 		}
+			
+	}
+		
 		escreva("\nSUA COMPRA DE ",qtdeCompra," DONNUTS, VALOR FINAL R$",valorFinal,"  \n")
 		escreva("\nDESEJA CONTINUAR COMPRANDO?? [S ou N] \n")
 		leia(sn)
@@ -98,7 +108,16 @@ faca{
 }enquanto(sn=='s' ou sn =='S')
 	
 	limpa()
-	escreva("\nFINAL - ",qtdeCompra," DONNUTS, VALOR FINAL R$",valorFinal,"  \n")
+	
+	escreva("*** CARRINHO FINAL*** \n\n")
+	
+	para(inteiro x=0;x<10;x++){
+		se(PRODUTOFINAL[x]!= ""){
+			escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t\t R$",VALORFINAL[x],"\n")
+		}
+	}
+	escreva("\nVALOR FINAL R$",valorFinal,"  \n")
+	
 	escreva("\n***OBRIGADO PELA COMPRA!***")
 	
 	}
@@ -109,7 +128,7 @@ faca{
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 197; 
+ * @POSICAO-CURSOR = 2939; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
