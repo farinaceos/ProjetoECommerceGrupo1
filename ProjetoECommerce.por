@@ -14,6 +14,7 @@ inclua biblioteca Matematica --> Mat
 		 * 		   - VALOR - Grupo Decide
 		 * 		   - ESTOQUE - 10 de cada produto para todos os grupos (10 produtos, 100 produtos cada grupo)
 		 */
+
 	
 	cadeia PRODUTO[10]
 	cadeia CODIGO[10]
@@ -25,7 +26,7 @@ inclua biblioteca Matematica --> Mat
 	cadeia compra
 	caracter sn = 'S'
 	inteiro quantidade
-	real carrinho = 0
+	real carrinho = 0.0
 	inteiro qtdeCompra =0
 	real valorFinal =0.0
 	real imposto = 0.09
@@ -68,7 +69,7 @@ inclua biblioteca Matematica --> Mat
 	faca{	
 		escreva("*******DONNUTIX*******\n\n")
 		escreva("**Seu Donnut, Nosso mix**\n\n\n")
-		escreva("DESEJA FAZER COMPRAS?\n")
+		escreva("DESEJA FAZER COMPRAS? [S ou N]\n")
 		leia(sn)
 		se(sn=='s' ou sn=='S'){
 		faca{
@@ -87,7 +88,7 @@ inclua biblioteca Matematica --> Mat
 					escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t\t R$",VALORFINAL[x],"\n")
 			}
 		}
-				escreva("\n        Quais Donnut's deseja comprar? \n")
+				escreva("\n        Quais Donnut's deseja comprar? (escreva o código do produto) \n")
 				leia(compra)
 				para(inteiro x=0;x<10;x++){
 					se(compra==PRODUTO[x] ou compra == CODIGO[x]){
@@ -156,7 +157,7 @@ inclua biblioteca Matematica --> Mat
 	escreva("\n***OBRIGADO PELA COMPRA!***")
 	leia(y)
 	quantidade=0
-	carrinho=0
+	carrinho=0.0
 	para(inteiro x=0;x<10;x++){
 		QTDEFINAL[x] = 0
 		PRODUTOFINAL[x] = ""
@@ -169,6 +170,7 @@ inclua biblioteca Matematica --> Mat
 	
 	
 }senao{
+	limpa()
 escreva("ATE LOGO")
 }
 }enquanto(sn=='s' ou sn=='S')
@@ -180,7 +182,7 @@ escreva("ATE LOGO")
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 533; 
+ * @POSICAO-CURSOR = 5087; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
