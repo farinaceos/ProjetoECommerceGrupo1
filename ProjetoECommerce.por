@@ -27,6 +27,12 @@ programa
 	real carrinho = 0
 	inteiro qtdeCompra =0
 	real valorFinal =0.0
+	real imposto = 0.09
+	real pgtVista = 0.0 //10% de desconto
+	real pgtCartao = 0.0 //10% a mais
+	real pgtParcelado =0.0 //15% a mais (tem de aparecer cada parcela)
+	real valorFECHADO
+	cadeia y="grupo1"
 	
 	para(inteiro x=0;x<10;x++){
 		CODIGO[x]=("g1"+ (x +1))
@@ -58,68 +64,106 @@ programa
 	para(inteiro x=0;x<10;x++){
 		ESTOQUE[x]=(10)
 	}
-faca{
-		limpa()
+	faca{	
 		escreva("*******DONNUTIX*******\n\n")
 		escreva("**Seu Donnut, Nosso mix**\n\n\n")
-		escreva("COD\tSABORES DONNUT'S\tVALOR\t\tESTOQUE\n\n")
-		
-		
-		para(inteiro x=0;x<10;x++){
-			escreva(CODIGO[x], "\t", PRODUTO[x],"\t\tR$ ",VALOR[x],"\t\t",ESTOQUE[x],"\n")
-		}
-	
-		escreva("\n        Quais Donnut's deseja comprar? \n")
-		leia(compra)
-		para(inteiro x=0;x<10;x++){
-			se(compra==PRODUTO[x] ou compra == CODIGO[x]){
-				escreva("\nCONFIRMA PRODUTO: \n", CODIGO[x], "\t", PRODUTO[x],"\t",VALOR[x],"R$ \t\t   ",ESTOQUE[x],"\n\n")
-				escreva("CERTO?? [S ou N] \n")
-				leia(sn)
-				se(sn=='s' ou sn=='S'){
-					escreva("\nQual a quantidade? \n")
-					leia(quantidade)
-					carrinho = quantidade*VALOR[x]
-					escreva ("CARRINHO ATUAL: ", PRODUTO[x],"\t", VALOR[x], "\t PREÇO FINAL: R$",carrinho,"\n")
-					escreva("\nCONFIRMA?? [S ou N]\n")
-					leia(sn)
-					se(sn=='s' ou sn=='S'){
-						se(quantidade>ESTOQUE[x])
-						{escreva("ESTOQUE INDISPONÍVEL!\n\n")pare
-						} senao
-					qtdeCompra+=quantidade
-					valorFinal+=carrinho
-					ESTOQUE[x]= ESTOQUE[x]-quantidade
-					PRODUTOFINAL[x]=PRODUTO[x]
-					se(PRODUTO[x]==PRODUTOFINAL[x]){
-					VALORFINAL[x]+=carrinho
-					QTDEFINAL[x]+=quantidade
-					}
-				}
-			}escreva("\nSALDO RESTANTE: ", PRODUTO[x],"\t",ESTOQUE[x],"\n")
-		}
-			
-	}
-		
-		escreva("\nSUA COMPRA DE ",qtdeCompra," DONNUTS, VALOR FINAL R$",valorFinal,"  \n")
-		escreva("\nDESEJA CONTINUAR COMPRANDO?? [S ou N] \n")
+		escreva("DESEJA FAZER COMPRAS?\n")
 		leia(sn)
-		
-}enquanto(sn=='s' ou sn =='S')
+		se(sn=='s' ou sn=='S'){
+		faca{
+				limpa()
+				escreva("*******DONNUTIX*******\n\n")
+				escreva("**Seu Donnut, Nosso mix**\n\n\n")
+				escreva("COD\tSABORES DONNUT'S\tVALOR\t\tESTOQUE\n\n")
+				
+				
+				para(inteiro x=0;x<10;x++){
+					escreva(CODIGO[x], "\t", PRODUTO[x],"\t\tR$ ",VALOR[x],"\t\t",ESTOQUE[x],"\n")
+				}
+				escreva("\n***CARRINHO***\n\n")
+					para(inteiro x=0;x<10;x++){
+					se(PRODUTOFINAL[x]!= ""){
+					escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t\t R$",VALORFINAL[x],"\n")
+			}
+		}
+				escreva("\n        Quais Donnut's deseja comprar? \n")
+				leia(compra)
+				para(inteiro x=0;x<10;x++){
+					se(compra==PRODUTO[x] ou compra == CODIGO[x]){
+						escreva("\nCONFIRMA PRODUTO: \n", CODIGO[x], "\t", PRODUTO[x],"\t",VALOR[x],"R$ \t\t   ",ESTOQUE[x],"\n\n")
+						escreva("CERTO?? [S ou N] \n")
+						leia(sn)
+						se(sn=='s' ou sn=='S'){
+							escreva("\nQual a quantidade? \n")
+							leia(quantidade)
+							carrinho = quantidade*VALOR[x]
+							escreva ("CARRINHO ATUAL: ", PRODUTO[x],"\t", VALOR[x], "\t PREÇO: R$",carrinho,"\n")
+							escreva("\nCONFIRMA?? [S ou N]\n")
+							leia(sn)
+							se(sn=='s' ou sn=='S'){
+								se(quantidade>ESTOQUE[x])
+								{escreva("ESTOQUE INDISPONÍVEL!\n\n")pare
+								} senao
+							qtdeCompra+=quantidade
+							valorFinal+=carrinho
+							ESTOQUE[x]= ESTOQUE[x]-quantidade
+							PRODUTOFINAL[x]=PRODUTO[x]
+							se(PRODUTO[x]==PRODUTOFINAL[x]){
+							VALORFINAL[x]+=carrinho
+							QTDEFINAL[x]+=quantidade
+							}
+						}
+					}escreva("\nSALDO RESTANTE: ", PRODUTO[x],"\t",ESTOQUE[x],"\n")
+				}
+					
+			}
+				limpa()
+				escreva("\nSUA COMPRA DE ",qtdeCompra," DONNUTS, VALOR ATUAL R$",valorFinal,"  \n")
+				escreva("\n***CARRINHO***\n\n")
+					para(inteiro x=0;x<10;x++){
+					se(PRODUTOFINAL[x]!= ""){
+					escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t\t R$",VALORFINAL[x],"\n")
+			}
+		}
+				escreva("\nDESEJA CONTINUAR COMPRANDO?? [S ou N] \n")
+				leia(sn)
+				
+		}enquanto(sn=='s' ou sn =='S')
 	
 	limpa()
 	
-	escreva("*** CARRINHO FINAL*** \n\n")
+	escreva("*** NOTA FISCAL *** \n\n")
+	escreva("*******DONNUTIX*******\n\n")
 	
 	para(inteiro x=0;x<10;x++){
 		se(PRODUTOFINAL[x]!= ""){
-			escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t\t R$",VALORFINAL[x],"\n")
+			escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t R$",VALORFINAL[x],"\n")
 		}
 	}
+	valorFECHADO = valorFinal+(valorFinal*imposto)
+	pgtVista = valorFECHADO-(valorFECHADO*0.10)
+	pgtCartao = valorFECHADO+(valorFECHADO*0.10)
+	pgtParcelado = valorFECHADO+(valorFECHADO*0.15)
+	
 	escreva("\nVALOR FINAL R$",valorFinal,"  \n")
-	
+	escreva("TRIBUTOS COLETADOS: 9%\n")
+	escreva("VALOR FINAL COM IMPOSTOS: R$",valorFECHADO,"\n")
+	escreva("***FORMAS DE PAGAMENTO***\n\n")
+	escreva("A VISTA (10% de desconto) : R$", pgtVista,"\n")
+	escreva("NO CARTAO (10% de taxa) : R$", pgtCartao,"\n")
+	escreva("PARCELADO (15% de taxa) : em 2x de R$", (pgtParcelado/2),"\n")
 	escreva("\n***OBRIGADO PELA COMPRA!***")
+	leia(y)
+	quantidade=0
+	carrinho=0
+	limpa()
+	sn='s'
 	
+	
+}senao{
+escreva("ATE LOGO")
+}
+}enquanto(sn=='s' ou sn=='S')
 	}
 
 }
@@ -128,7 +172,7 @@ faca{
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2939; 
+ * @POSICAO-CURSOR = 4593; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
