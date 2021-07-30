@@ -1,8 +1,9 @@
 programa
 {
-//CODIGO INICIAL - ESTRUTURA BASICA 	29/07 às 18:15
-//CODIGO REFORMULADO - ESTRUTURA DE CARRINHO, TOTALIZADOR DE COMPRA, TOTALIZADOR DE VALORES, RECURSIVIDADE DA LOJA   30/07  às  12:50
-
+//CODIGO INICIAL - ESTRUTURA BASICA 	                                                                            29/07  às  18:15
+//CODIGO REFORMULADO - ESTRUTURA DE CARRINHO, TOTALIZADOR DE COMPRA, TOTALIZADOR DE VALORES, RECURSIVIDADE DA LOJA  30/07  às  12:50
+//CARRINHO ADICIONADO - NOTA FISCAL FINALIZADA - FORMAS DE PAGAMENTO - IMPOSTOS - RECURSIVIDADE DO CODIGO           30/07  às  18:15
+inclua biblioteca Matematica --> Mat
 	funcao inicio()
 	{
 		/*
@@ -149,13 +150,20 @@ programa
 	escreva("TRIBUTOS COLETADOS: 9%\n")
 	escreva("VALOR FINAL COM IMPOSTOS: R$",valorFECHADO,"\n")
 	escreva("***FORMAS DE PAGAMENTO***\n\n")
-	escreva("A VISTA (10% de desconto) : R$", pgtVista,"\n")
-	escreva("NO CARTAO (10% de taxa) : R$", pgtCartao,"\n")
-	escreva("PARCELADO (15% de taxa) : em 2x de R$", (pgtParcelado/2),"\n")
+	escreva("A VISTA (10% de desconto) : R$", Mat.arredondar(pgtVista, 2),"\n")
+	escreva("NO CARTAO (10% de taxa) : R$", Mat.arredondar(pgtCartao,2),"\n")
+	escreva("PARCELADO (15% de taxa) : em 2x de R$", Mat.arredondar((pgtParcelado/2),2),"\n")
 	escreva("\n***OBRIGADO PELA COMPRA!***")
 	leia(y)
 	quantidade=0
 	carrinho=0
+	para(inteiro x=0;x<10;x++){
+		QTDEFINAL[x] = 0
+		PRODUTOFINAL[x] = ""
+		VALORFINAL[x] = 0.0
+		valorFinal=0.0
+		qtdeCompra=0
+	}
 	limpa()
 	sn='s'
 	
@@ -172,7 +180,7 @@ escreva("ATE LOGO")
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 4593; 
+ * @POSICAO-CURSOR = 533; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
