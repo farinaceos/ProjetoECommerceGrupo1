@@ -4,6 +4,7 @@ programa
 //CODIGO REFORMULADO - ESTRUTURA DE CARRINHO, TOTALIZADOR DE COMPRA, TOTALIZADOR DE VALORES, RECURSIVIDADE DA LOJA  30/07  às  12:50
 //CARRINHO ADICIONADO - NOTA FISCAL FINALIZADA - FORMAS DE PAGAMENTO - IMPOSTOS - RECURSIVIDADE DO CODIGO           30/07  às  18:15
 //ADIÇÃO DE COMENTÁRIOS PARA EXPLICAÇÃO DO CÓDIGO.													 01/08  às  02:26
+//Correção do valor do imposto e do bug do Estoque Inválido												 01/08  às  23:07
 inclua biblioteca Matematica --> Mat
 	funcao inicio()
 	{
@@ -54,6 +55,7 @@ inclua biblioteca Matematica --> Mat
 	real pgtCartao = 0.0 		//Forma de Pagamento (2) - 10% de acréscimo
 	real pgtParcelado =0.0 		//Forma de Pagamento(3) - Parcelado com 15% a mais (tem de aparecer cada parcela)
 	real valorFECHADO 			//Variável para calcular o preço final com alterações de imposto e desconto/acrescimo de formas de pagamento
+	real custoImposto =0.0
 	cadeia y="grupo1" 			//Variável coringa para a última tela aguardar um input, pode ser qualquer coisa desde que seja lida
 	
 	para(inteiro x=0;x<10;x++){   //Laço de Repetição para calcular o Código dos produtos
@@ -131,7 +133,9 @@ inclua biblioteca Matematica --> Mat
 											leia(sn)							//Leitura de sn
 											se(sn=='s' ou sn=='S'){				//Desvio condicional para Validação do estoque
 												se(quantidade>ESTOQUE[x])		//Verifica se pedido é válido
-												{escreva("ESTOQUE INDISPONÍVEL!\n\n")pare //Caso pedido seja inválido, quebra o Desvio, não faz as alterações futuras e retorna para a tela de compra
+												{escreva("ESTOQUE INDISPONÍVEL!\n\n") //Caso pedido seja inválido, quebra o Desvio, não faz as alterações futuras e retorna para a tela de compra
+												leia(y)
+												pare 
 												} senao						//Se pedido é válido, faz as alterações
 											qtdeCompra+=quantidade				//Coloca a quantidade de compras = quantidade que estava no carrinho
 											valorFinal+=carrinho				//Valor final da compra soma com o que foi colocado no carrinho
@@ -169,13 +173,14 @@ inclua biblioteca Matematica --> Mat
 						escreva(QTDEFINAL[x], " ", PRODUTOFINAL[x],"\t R$",VALORFINAL[x],"\n")	//Escreve os produtos do carrinho na tela
 					}
 				}
-				valorFECHADO = valorFinal+(valorFinal*imposto)			//Calcula o valor com alteração do imposto
+				valorFECHADO = valorFinal
 				pgtVista = valorFECHADO-(valorFECHADO*0.10)				//Calcula o valor + imposto com desconto para pagamento à vista
 				pgtCartao = valorFECHADO+(valorFECHADO*0.10)				//Calcula o valor + imposto com acréscimo para pagamento no Cartão
 				pgtParcelado = valorFECHADO+(valorFECHADO*0.15)			//Calcula o valor + imposto com acréscimo para pagamento parcelado
+				custoImposto = Mat.arredondar((valorFinal*imposto),2)
 				
-				escreva("\nVALOR FINAL R$",valorFinal,"  \n")			//Escreve o valor sem impostos ou descontos para o cliente
-				escreva("TRIBUTOS COLETADOS: ",(imposto*100),"%\n")		//Exibe o valor do imposto
+				//escreva("\nVALOR FINAL R$",valorFinal,"  \n")			//Escreve o valor sem impostos ou descontos para o cliente
+				escreva("TRIBUTOS COLETADOS: ",(imposto*100),"% = ", custoImposto,"R$ \n")		//Exibe o valor do imposto
 				escreva("VALOR FINAL COM IMPOSTOS: R$",valorFECHADO,"\n")	//Exibe o Valor Final com impostos
 				escreva("***FORMAS DE PAGAMENTO***\n\n")										//exibe formas de pagamento
 				escreva("A VISTA (10% de desconto) : R$", Mat.arredondar(pgtVista, 2),"\n")			//Exibe preço a vista (arredonda para 2 casas decimais)
@@ -221,7 +226,7 @@ inclua biblioteca Matematica --> Mat
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 6395; 
+ * @POSICAO-CURSOR = 574; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
